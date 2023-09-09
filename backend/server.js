@@ -1,23 +1,33 @@
 require('dotenv').config();
 
-// express app
 const express = require('express');
-const workoutRoutes = require('./routes/workouts')
+const colors = require('colors');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const workoutRoutes = require('./routes/workouts');
 
+// express app
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
+const MONGO_URI = process.env.MONGO_URI
 
 // middleware
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     next()
-})
+});
+app.use(express.json());
+app.use(cors());
 
 // routes
-app.use('/api/workouts', workoutRoutes)
+app.use('/api/workouts', workoutRoutes);
 
+// connect to mongodb
+mongoose.connect(MONGO_URI).then(() => {
+    console.log(`Connection to the MongoDB established successfully`.cyan);
+});
 
 // listen for requests
 app.listen(PORT, () => {
-    console.log('Server is running on PORT: ', PORT)
+    console.log(`Server is running on http://localhost:${PORT}`.magenta.underline)
 });
