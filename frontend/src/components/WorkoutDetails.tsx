@@ -4,16 +4,19 @@ export interface WorkoutProps {
     title: string,
     reps: number,
     load: number,
-    createAt: string
+    createdAt: string
   }
 }
 
 const WorkoutDetails = ({workout}: WorkoutProps) => {
 
-    console.log(workout);
-
   return (
-      <div>{workout.title}</div>
+    <div className="workout-details">
+      <h4>{workout.title}</h4>
+      <p><strong>Load (Kg): </strong>{workout.load}</p>
+      <p><strong>Reps: </strong>{workout.reps}</p>
+      <p>{workout.createdAt}</p>
+      </div>
     )
 }
 
