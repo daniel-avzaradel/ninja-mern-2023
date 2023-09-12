@@ -15,7 +15,7 @@ const WorkoutDetails = ({workout}: WorkoutProps) => {
       <h4>{workout.title}</h4>
       <p><strong>Load (Kg): </strong>{workout.load}</p>
       <p><strong>Reps: </strong>{workout.reps}</p>
-      <p>Created At: {workout.createdAt}</p>
+      <p>C{workout.createdAt}</p>
       </div>
     )
 }
