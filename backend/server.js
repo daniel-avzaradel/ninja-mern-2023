@@ -12,9 +12,6 @@ const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI
 
 // middleware
-app.use((req, res, next) => {
-    next()
-});
 app.use(express.json());
 app.use(cors());
 

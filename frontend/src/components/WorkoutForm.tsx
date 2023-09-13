@@ -7,32 +7,33 @@ const WorkoutForm = () => {
     const [reps, setReps] = useState('');
     const [error, setError] = useState(null);
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
+    
+        const workout = { title, load, reps };
+        console.log(JSON.stringify(workout));
         
-        const workout = { title, load, reps }
-        
-        const response = await fetch('/api/workouts', {
+        const response = await fetch('http://localhost:4000/api/workouts', {
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
         });
-
-        const json = await response.json();
-
+        const json = await response.json()
+    
         if (!response.ok) {
-            setError(json.error)
+          setError(json.error)
         }
         if (response.ok) {
-            setError(null);
-            console.log('New workout added');
-            setTitle('');
-            setReps('');
-            setLoad('');
+          setError(null)
+          setTitle('')
+          setLoad('')
+          setReps('')
+          console.log('new workout added:', json)
         }
-    }
+    
+      }
 
   return (
       <form className="create" onSubmit={handleSubmit}>
@@ -48,6 +49,7 @@ const WorkoutForm = () => {
           <input type="text" onChange={(e) => setReps(e.target.value)} value={reps} />
 
           <button>Add Workout</button>
+          {error && <div className='error'>{ error }</div>}
     </form>
   )
 }
