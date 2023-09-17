@@ -1,4 +1,7 @@
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+
+// date-fns
+import {formatDistanceToNow} from 'date-fns';
 
 export interface WorkoutProps {
   workout: {
@@ -30,8 +33,8 @@ const WorkoutDetails = ({ workout }: WorkoutProps) => {
       <h4>{workout.title}</h4>
       <p><strong>Load (Kg): </strong>{workout.load}</p>
       <p><strong>Reps: </strong>{workout.reps}</p>
-      <p>Create at: {workout.createdAt}</p>
-      <button onClick={handleDelete} className="delete-button">delete</button>
+      <p>{formatDistanceToNow(new Date(workout.createdAt), {addSuffix: true, includeSeconds: true})}</p>
+      <button onClick={handleDelete} className="delete-button material-symbols-outlined">delete</button>
       </div>
     )
 }
