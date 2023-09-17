@@ -8,7 +8,7 @@ const WorkoutForm = () => {
     const [title, setTitle] = useState('');
     const [load, setLoad] = useState('');
     const [reps, setReps] = useState('');
-    const [error, setError] = useState(null);
+    const [error, setError] = useState < string | null > (null);
 
     const handleSubmit = async (e : any) => {
         e.preventDefault();
@@ -28,9 +28,10 @@ const WorkoutForm = () => {
             }
         });
         const json = await response.json()
-        
+        console.log(json);
+
         if (! response.ok) {
-            setError(json.message)
+            setError(json.error + ': ' + json.emptyFields.map((x : string) => x))
         }
         if (response.ok) {
             setError(null)
@@ -40,7 +41,6 @@ const WorkoutForm = () => {
             console.log('new workout added: ', json);
             dispatch({type: 'CREATE_WORKOUT', payload: workout})
         }
-
     }
 
     return (

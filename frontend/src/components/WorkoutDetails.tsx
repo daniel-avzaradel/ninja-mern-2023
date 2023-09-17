@@ -31,7 +31,7 @@ const WorkoutDetails = ({ workout }: WorkoutProps) => {
       <p><strong>Load (Kg): </strong>{workout.load}</p>
       <p><strong>Reps: </strong>{workout.reps}</p>
       <p>Create at: {workout.createdAt}</p>
-      <span onClick={handleDelete}>delete</span>
+      <button onClick={handleDelete} className="delete-button">delete</button>
       </div>
     )
 }
