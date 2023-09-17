@@ -22,8 +22,12 @@ const Home = () => {
     return (
         <div className='home'>
             <div className="workouts">
-                {workouts && workouts.map((item : any) => {
-                    return <WorkoutDetails workout={item} key={item._id} />})
+                {workouts && workouts.map((item : any, i: number) => {
+                    return (
+                        <div key={item._id + i}>
+                        <WorkoutDetails workout={item} />
+                        </div>
+                )})
                 }
             </div>
             <WorkoutForm />
